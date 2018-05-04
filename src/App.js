@@ -4,26 +4,11 @@ import {
   Route,
   Link,
 } from 'react-router-dom';
+import Home from './Home';
+import Ingredients from './Ingredients';
+import Recipes from './Recipes';
 
 import './App.css';
-
-const Home = () => (
-  <div>
-    MealPlanner
-  </div>
-);
-
-const Ingredients = () => (
-  <div>
-    Ingredients
-  </div>
-);
-
-const Recipes = () => (
-  <div>
-    Recipes
-  </div>
-);
 
 const App = () => (
   <div className="lg:container mx-auto">
