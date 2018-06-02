@@ -1,11 +1,13 @@
 import React from 'react';
 import axios from '../axios';
+import NoIngredients from './NoIngredients';
 
 class Ingredients extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: true,
+      loadError: null,
       ingredients: [],
     };
   }
@@ -13,11 +15,17 @@ class Ingredients extends React.Component {
   componentDidMount() {
     axios
       .get('ingredients')
-      .then(resp =>
-        this.setState({
-          ingredients: [...this.state.ingredients, ...resp.data],
-          loading: false,
-        })
+      .then(
+        resp => {
+          this.setState({
+            ingredients: [...this.state.ingredients, ...resp.data.ingredients],
+            loading: false,
+            loadError: null,
+          });
+        },
+        err => {
+          this.setState({ loadError: err.message, loading: false });
+        }
       )
       .catch(err =>
         this.setState({
@@ -28,24 +36,24 @@ class Ingredients extends React.Component {
   }
 
   render() {
-    if (this.state.loading) {
+    const { loadError, loading, ingredients } = this.state;
+
+    if (loading) {
       return <div>Loading...</div>;
     }
 
-    if (this.state.loadError) {
+    if (loadError) {
       return <div>{this.state.loadError.toString()}</div>;
+    }
+
+    if (ingredients.length === 0) {
+      return <NoIngredients />;
     }
 
     return (
       <div>
         Ingredients:
-        {this.state.ingredients.length > 0 && (
-          <ul>
-            {this.state.ingredients.map(ingredient => (
-              <div>{ingredient.name}</div>
-            ))}
-          </ul>
-        )}
+        <ul>{ingredients.map(ingredient => <div>{ingredient.name}</div>)}</ul>
       </div>
     );
   }
