@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Home from './Home';
 import Ingredients from './Ingredients';
 import Recipes from './Recipes';
@@ -15,7 +11,9 @@ const App = () => (
     <Router>
       <div>
         <header className="App-header">
-          <h1 className="bg-purple-darker text-grey-lightest p-6 shadow-lg">MealPlanner</h1>
+          <h1 className="bg-purple-darker text-grey-lightest p-6 shadow-lg">
+            MealPlanner
+          </h1>
         </header>
         <p className="text-base p-6">
           To get started, edit <code>src/App.js</code> and save to reload.

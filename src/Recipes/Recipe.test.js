@@ -11,4 +11,3 @@ describe('<Recipes />', () => {
     shallow(factory());
   });
 });
-
